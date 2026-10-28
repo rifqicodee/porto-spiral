@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useSpring } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
 export default function CustomCursor() {
+  const pathname = usePathname();
   const [label, setLabel] = useState('');
   const [isHovering, setIsHovering] = useState(false);
   const pos = useRef({ x: 0, y: 0 });
@@ -42,6 +44,9 @@ export default function CustomCursor() {
       window.removeEventListener('mouseover', over);
     };
   }, [springX, springY]);
+
+  // Halaman /contact memakai TargetCursor sendiri
+  if (pathname === '/contact') return null;
 
   return (
     <>
